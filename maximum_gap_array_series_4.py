@@ -35,7 +35,7 @@ Note : Regardless the sign of negativity .
 """
 
 
-def max_gap(numbers):
+def max_gap1(numbers):
     gap_big = 0
     numbers_sort = sorted(numbers, reverse = True)
     i_last = numbers_sort[0]
@@ -47,7 +47,7 @@ def max_gap(numbers):
     return gap_big
 
 
-def max_gap(numbers): 
+def max_gap2(numbers): 
     gap_big = 0 
     numbers.sort(reverse = True)
     for i in range(len(numbers) - 1):
@@ -61,6 +61,8 @@ def main():
     # numbers = [13,10,2,9,5]
     # print(max_gap(numbers))
     # Test.describe("Basic tests")
+    max_gap = map_gap1
+    # max_gap = map_gap2
     assert max_gap([13,10,2,9,5]) == 4
     assert max_gap([13,3,5]) == 8
     assert max_gap([24,299,131,14,26,25]) == 168
