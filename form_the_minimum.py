@@ -20,6 +20,7 @@ duplications
 
 
 def min_value(digits):
+    """Apply string join approach."""
     sorted_digits_ls = sorted(set(digits))
     lst = []
     for d in sorted_digits_ls:
@@ -28,6 +29,7 @@ def min_value(digits):
 
 
 def min_value2(digits):
+    """Apply 10 to the powers approach."""
     sorted_digits_ls = sorted(set(digits))
     value = 0
     for p, d in enumerate(reversed(sorted_digits_ls)):
