@@ -27,21 +27,30 @@ def min_value(digits):
     return int(''.join(lst))
 
 
+def min_value2(digits):
+    sorted_digits_ls = sorted(set(digits))
+    value = 0
+    for p, d in enumerate(reversed(sorted_digits_ls)):
+        # Why reverse? [1, 4, 8] => [8, 4, 1] w/ power 0, 1, 2.
+        value += d * (10 ** p)
+    return value
+
+
 def main():
     # Output: 13
     digits = [1, 3, 1]
     print(min_value(digits))
-    # print(min_value2(digits))
+    print(min_value2(digits))
 
     # Output: 457
     digits = [4, 7, 5, 7]
     print(min_value(digits))
-    # print(min_value2(digits))
+    print(min_value2(digits))
 
     # Output: 148
     digits = [4, 8, 1, 4]
     print(min_value(digits))
-    # print(min_value2(digits))
+    print(min_value2(digits))
 
 
 if __name__ == '__main__':
