@@ -33,31 +33,27 @@ pattern(4):
 
 
 def pattern(n):
-
+    end = 0
+    stair = 0
+    lst = []
+    if n < 1:
+        return ''
+    while stair != n:    
+        for i in range(n, end, -1):
+            lst.append(str(i))
+        if end + 1 != n:
+            lst.append("\n") 
+        end += 1
+        stair += 1
+    return ''.join(lst)
 
 
 def main():
-
-Test.assert_equals(pattern(1),"1")
-Test.assert_equals(pattern(2),"21\n2")
-Test.assert_equals(pattern(5),"54321\n5432\n543\n54\n5")
+    assert pattern(1) == "1"
+    assert pattern(2) == "21\n2"
+    assert pattern(5) == "54321\n5432\n543\n54\n5"
 
 
 if __name__ == '__main__':
-	main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    main()
 
