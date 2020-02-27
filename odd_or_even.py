@@ -18,16 +18,34 @@ Have fun!
 
 
 def odd_or_even(arr):
+    arr_sum = 0
+    for d in arr:
+        arr_sum += d
+    if arr_sum % 2 == 0 or arr_sum == 0:
+        return 'even'
+    else:
+        return 'odd'
 
+
+def odd_or_even(arr):
+    arr_sum = sum(d for d in arr)
+    if arr_sum % 2 == 0 or arr_sum == 0:
+        return 'even'
+    else:
+        return 'odd'
+
+
+def odd_or_even(arr):
+    return 'even' if sum(arr) % 2 == 0 else 'odd'
 
 
 def main():
-
-Test.assert_equals(odd_or_even([0, 1, 2]), "odd")
-Test.assert_equals(odd_or_even([0, 1, 3]), "even")
-Test.assert_equals(odd_or_even([1023, 1, 2]), "even")
-
+    assert odd_or_even([0]) == "even"
+    assert odd_or_even([0, 1, 2]) == "odd"
+    assert odd_or_even([0, 1, 3]) == "even"
+    assert odd_or_even([1023, 1, 2]) == "even"
 
 
 if __name__ == '__main__':
-	main()
+    main()
+
