@@ -17,14 +17,28 @@ number(["a", "b", "c"]) # => ["1: a", "2: b", "3: c"]
 
 
 def number(lines):
+    """Apply enumerate approach."""
     # dict: {number->c}
     # list: ['number: c']
     # number_c_d = {i + 1: c for i, c in enumerate(lines)}
     # return number_c_d
+    
     if lines == []:
         return []
     number_c_ls = [str(i + 1) + ': ' + c for i, c in enumerate(lines)]
     return number_c_ls
+
+
+def number(lines):
+     """Apply list & append approach."""
+    lst = []
+    i = 1
+    if lines == []:
+        return []
+    for c in lines:
+        lst.append(str(i) + ': ' + c)
+        i += 1
+    return lst
 
 
 def main():
@@ -39,4 +53,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-    
