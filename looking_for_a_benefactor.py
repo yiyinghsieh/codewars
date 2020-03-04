@@ -29,11 +29,11 @@ so that he clearly sees that his expectations are not great enough.
 Notes:
 . all donations and navg are numbers (integers or floats), arr can be empty.
 . See examples below and "Test Samples" to see which return is to be done.
-new_avg(    , 92) should return 645
+new_avg([14, 30, 5, 7, 9, 11, 15], 92) should return 645
 new_avg([14, 30, 5, 7, 9, 11, 15], 2) 
-should raise an error (ValueError or invalid_argument or argument-error or 
-DomainError) 
-or return `-1` or ERROR or Nothing or None depending on the language
+should raise an error 
+(ValueError or invalid_argument or argument-error or DomainError) 
+or return `-1` or ERROR or Nothing or None depending on the language.
 """
 
 
