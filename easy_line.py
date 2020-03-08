@@ -28,50 +28,56 @@ easyline(4) => 70
 easyline(50) => 100891344545564193334812497256
 
 ##Ref: http://mathworld.wolfram.com/BinomialCoefficient.html
-
-Note:
-In Javascript, Coffeescript, Typescript, C++, PHP, C, R, Nim, Fortran to 
-get around the fact that we have no big integers the function easyLine(n) 
-will in fact return
-
-round(log(easyline(n)))
-and not the easyline(n) of the other languages.
-So, in Javascript, Coffeescript, Typescript, C++, PHP, R, Nim, C, Fortran:
-
-easyLine(0) => 0
-easyLine(1) => 1
-easyLine(4) => 4
-easyLine(50) => 67
 """
 
 
 def easyline(n):
+    if n <= 1:
+        return sum([1] * (n + 1))
+    
+    # Create "raw" Pascal's triangle
+    T = []
+    for i in range(n + 1):
+        T.append([1] * (i + 1)) 
+    
+    # Iterate through rows to update middle numbers.
+    for i in range(2, n + 1):
+        for j in range(1, len(T[i]) - 2 + 1):
+            T[i][j] = T[i-1][j-1] + T[i-1][j]
+    # i: row
+    # len(T[i]): triangle T row i's len. 
+    squared_sum = 0
+    for num in T[-1]:
+        squared_sum += num**2
+    return squared_sum
 
 
 def main():
+    # Output: 1
+    # n = 0
+    # print(easyline(n))
 
+    # # Output: 2
+    # n = 1
+    # print(easyline(n))
 
-# def testing(actual, expected):
-#     Test.assert_equals(actual, expected)
+    # Output: 6
+    # n = 2
+    # print(easyline(n))
 
-# Test.describe("easyline")
-# Test.it("Basic tests")
-# testing(easyline(7), 3432)
-# testing(easyline(13), 10400600)
-# testing(easyline(17), 2333606220)
-# testing(easyline(19), 35345263800)
+    # Output: 20
+    # n = 3
+    # print(easyline(n))
+
+    # Output: 70
+    # n = 4
+    # print(easyline(n))
+
+    # Output: 252
+    n = 5
+    print(easyline(n))
 
 
 if __name__ == '__main__':
-	main()
-
-	
-
-
-
-
-
-
-
-
+    main()
 
