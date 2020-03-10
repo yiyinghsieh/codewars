@@ -31,7 +31,7 @@ easyline(50) => 100891344545564193334812497256
 """
 
 
-def easyline(n):
+def easyline1(n):
     if n <= 1:
         return sum([1] * (n + 1))
     
@@ -44,38 +44,61 @@ def easyline(n):
     for i in range(2, n + 1):
         for j in range(1, len(T[i]) - 2 + 1):
             T[i][j] = T[i-1][j-1] + T[i-1][j]
-    # i: row
-    # len(T[i]): triangle T row i's len. 
+    
+    # Take the last to compute sum of squares.
     squared_sum = 0
     for num in T[-1]:
         squared_sum += num**2
     return squared_sum
 
 
+def easyline2(n):
+    if n <= 1:
+        return sum([1] * (n + 1))
+
+    T = []
+    for i in range(n + 1):
+        T.append([1] * (i + 1))
+
+        for j in range(1, len(T[i]) - 2 + 1):
+            T[i][j] = T[i - 1][j - 1] + T[i - 1][j]
+
+    num_sum = 0
+    for num in T[-1]:
+        num_sum += num **2
+    return num_sum
+
+
 def main():
     # Output: 1
-    # n = 0
-    # print(easyline(n))
+    n = 0
+    print(easyline1(n))
+    print(easyline2(n))
 
-    # # Output: 2
-    # n = 1
-    # print(easyline(n))
+    # Output: 2
+    n = 1
+    print(easyline1(n))
+    print(easyline2(n))
 
     # Output: 6
-    # n = 2
-    # print(easyline(n))
+    n = 2
+    print(easyline1(n))
+    print(easyline2(n))
 
     # Output: 20
-    # n = 3
-    # print(easyline(n))
+    n = 3
+    print(easyline1(n))
+    print(easyline2(n))
 
     # Output: 70
-    # n = 4
-    # print(easyline(n))
+    n = 4
+    print(easyline1(n))
+    print(easyline2(n))
 
     # Output: 252
     n = 5
-    print(easyline(n))
+    print(easyline1(n))
+    print(easyline2(n))
 
 
 if __name__ == '__main__':
