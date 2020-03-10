@@ -63,10 +63,10 @@ def easyline2(n):
         for j in range(1, len(T[i]) - 2 + 1):
             T[i][j] = T[i - 1][j - 1] + T[i - 1][j]
 
-    num_sum = 0
+    squared_sum = 0
     for num in T[-1]:
-        num_sum += num **2
-    return num_sum
+        squared_sum += num **2
+    return squared_sum
 
 
 def main():
