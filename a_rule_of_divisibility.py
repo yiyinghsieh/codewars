@@ -56,6 +56,16 @@ def seven(m):
     return m, count
 
 
+def seven(m):    
+    count = 0
+    while len(str(m)) > 2:
+        a = str(m)[:len(str(m)) - 1]
+        b = str(m)[len(str(m))-1:]
+        m = int(a) - 2 * int(b)
+        count += 1
+    return m, count
+
+    
 def main():
     # Output: (7, 2)
     # m = 483
