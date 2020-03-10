@@ -47,33 +47,26 @@ seven(477557101) should return [28, 7]
 """
 
 
-def seven(m):
-
+def seven(m):    
+    count = 0
+    while len(str(m)) > 2:
+        a, b = divmod(m, 10)
+        m = a - b * 2
+        count += 1
+    return m, count
 
 
 def main():
+    # Output: (7, 2)
+    # m = 483
+    # print(seven(m))
 
-Test.assert_equals(seven (1603), (7, 2))
-Test.assert_equals(seven (371), (35, 1))
-Test.assert_equals(seven (483), (42, 1))
-Test.assert_equals(seven(1021), (10, 2))
-
+    assert seven(1603) == (7, 2)
+    assert seven(371) == (35, 1)
+    assert seven(483) == (42, 1)
+    assert seven(1021) == (10, 2)
 
 
 if __name__ == '__main__':
-	main():
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    main()
 
