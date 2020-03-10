@@ -69,36 +69,69 @@ def easyline2(n):
     return squared_sum
 
 
+def easyline3(n):
+    if n <= 1:
+        return sum([1] * (n + 1))
+
+    # 1st prev_row for the 2nd row.
+    prev_row = [1, 1]
+
+    # Whiteboard debugging:
+    # i = 3
+    # prev_row = [1, 2, 1]
+    # row = [1, 3, 3, 1]
+    # len(row) = 4
+    # j in 1 ~ 2
+    # j = 1: row[1] = prev_row[0] + prev_row[1] = 1 + 2 = 3
+    # j = 2: row[2] = prev_row[1] + prev_row[2] = 2 + 1 = 3
+    for i in range(2, n + 1): 
+        row = [1] * (i + 1)
+
+        for j in range(1, len(row) - 2 + 1):
+            row[j] = prev_row[j - 1] + prev_row[j]
+
+        prev_row = row
+
+    squared_sum = sum([num ** 2 for num in row])
+    return squared_sum
+
+
 def main():
     # Output: 1
     n = 0
     print(easyline1(n))
     print(easyline2(n))
+    print(easyline3(n))
 
     # Output: 2
     n = 1
     print(easyline1(n))
     print(easyline2(n))
+    print(easyline3(n))
 
     # Output: 6
     n = 2
     print(easyline1(n))
     print(easyline2(n))
+    print(easyline3(n))
 
     # Output: 20
     n = 3
     print(easyline1(n))
     print(easyline2(n))
+    print(easyline3(n))
 
     # Output: 70
     n = 4
     print(easyline1(n))
     print(easyline2(n))
+    print(easyline3(n))
 
     # Output: 252
     n = 5
     print(easyline1(n))
     print(easyline2(n))
+    print(easyline3(n))
 
 
 if __name__ == '__main__':
