@@ -22,6 +22,11 @@ def number_of_occurrences(element, sample):
             count += 1
     return count
 
+
+def number_of_occurrences(element, sample):
+    return sample.count(element)
+
+
 def main():
     # # Output: 1
     # sample =  [0, 1, 2, 2, 3]
@@ -37,4 +42,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-    
