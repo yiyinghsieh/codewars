@@ -88,6 +88,14 @@ def row_sum_odd_numbers4(n):
     return sum(range(start_odd, end_odd + 1, 2))
 
 
+def row_sum_odd_numbers5(n):
+    """
+    Time complexity: O(1).
+    Space complexity: O(1).
+    """
+    return n ** 3
+
+
 def main():
     # # Output: 1
     # n = 3
@@ -117,11 +125,11 @@ def main():
     assert row_sum_odd_numbers4(19) == 6859
     assert row_sum_odd_numbers4(41) == 68921
 
-    # assert row_sum_odd_numbers5(1) == 1
-    # assert row_sum_odd_numbers5(2) == 8
-    # assert row_sum_odd_numbers5(13) == 2197
-    # assert row_sum_odd_numbers5(19) == 6859
-    # assert row_sum_odd_numbers5(41) == 68921
+    assert row_sum_odd_numbers5(1) == 1
+    assert row_sum_odd_numbers5(2) == 8
+    assert row_sum_odd_numbers5(13) == 2197
+    assert row_sum_odd_numbers5(19) == 6859
+    assert row_sum_odd_numbers5(41) == 68921
 
 
 if __name__ == '__main__':
