@@ -64,6 +64,30 @@ def row_sum_odd_numbers2(n):
     return sum(lst)
 
 
+def row_sum_odd_numbers3(n):
+    """
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
+    start_odd = n * (n - 1) + 1
+
+    row = []
+    for i in range(1, n + 1):
+        row.append(start_odd + (i - 1) * 2)
+    return sum(row)
+
+
+def row_sum_odd_numbers4(n):
+    """
+    Time complexity: O(n).
+    Space complexity: O(n).
+    """
+    start_odd = n * (n - 1) + 1
+    end_odd = start_odd + 2 * (n - 1)
+    # return sum([odd for odd in range(start_odd, end_odd + 1, 2)])
+    return sum(range(start_odd, end_odd + 1, 2))
+
+
 def main():
     # # Output: 1
     # n = 3
@@ -81,17 +105,17 @@ def main():
     assert row_sum_odd_numbers2(19) == 6859
     assert row_sum_odd_numbers2(41) == 68921
 
-    # assert row_sum_odd_numbers3(1) == 1
-    # assert row_sum_odd_numbers3(2) == 8
-    # assert row_sum_odd_numbers3(13) == 2197
-    # assert row_sum_odd_numbers3(19) == 6859
-    # assert row_sum_odd_numbers3(41) == 68921
+    assert row_sum_odd_numbers3(1) == 1
+    assert row_sum_odd_numbers3(2) == 8
+    assert row_sum_odd_numbers3(13) == 2197
+    assert row_sum_odd_numbers3(19) == 6859
+    assert row_sum_odd_numbers3(41) == 68921
 
-    # assert row_sum_odd_numbers4(1) == 1
-    # assert row_sum_odd_numbers4(2) == 8
-    # assert row_sum_odd_numbers4(13) == 2197
-    # assert row_sum_odd_numbers4(19) == 6859
-    # assert row_sum_odd_numbers4(41) == 68921
+    assert row_sum_odd_numbers4(1) == 1
+    assert row_sum_odd_numbers4(2) == 8
+    assert row_sum_odd_numbers4(13) == 2197
+    assert row_sum_odd_numbers4(19) == 6859
+    assert row_sum_odd_numbers4(41) == 68921
 
     # assert row_sum_odd_numbers5(1) == 1
     # assert row_sum_odd_numbers5(2) == 8
