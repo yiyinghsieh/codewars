@@ -11,23 +11,27 @@ times.
 
 
 def find_it(seq):
-
-
+    dic = dict()
+    for seqs in seq:
+        dic[seqs] = dic.get(seqs, 0) + 1
+    for k, v in dic.items():
+        if v % 2 != 0:
+            return k
+    
 
 def main():
-	# Output: 5
-	seq = [20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]
-	print(find_it(seq))
+    # # Output: 5
+    # seq = [20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]
+    # print(find_it(seq))
 
-
-    # assert find_it([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]) == 5
-    # assert find_it([1,1,2,-2,5,2,4,4,-1,-2,5]) == -1
-    # assert find_it([20,1,1,2,2,3,3,5,5,4,20,4,5]) == 5
-    # assert find_it([10]) == 10
-    # assert find_it([1,1,1,1,1,1,10,1,1,1,1]) == 10
-    # assert find_it([5,4,3,2,1,5,4,3,2,10,10]) == 1
+    assert find_it([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]) == 5
+    assert find_it([1,1,2,-2,5,2,4,4,-1,-2,5]) == -1
+    assert find_it([20,1,1,2,2,3,3,5,5,4,20,4,5]) == 5
+    assert find_it([10]) == 10
+    assert find_it([1,1,1,1,1,1,10,1,1,1,1]) == 10
+    assert find_it([5,4,3,2,1,5,4,3,2,10,10]) == 1
 
 
 if __name__ == '__main__':
-	main()
+    main()
 
