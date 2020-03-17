@@ -9,14 +9,7 @@ times you must multiply the digits in num until you reach a single
 digit.
 
 For example:
-persistence(39) => 3  # Because 3*9 = 27, 2*7 = 14, 1*4=4
-                       # and 4 has only one digit.
 
-persistence(999) => 4 # Because 9*9*9 = 729, 7*2*9 = 126,
-                       # 1*2*6 = 12, and finally 1*2 = 2.
-
-persistence(4) => 0   # Because 4 is already a one-digit number.
- 
 persistence(39) # returns 3, because 3*9=27, 2*7=14, 1*4=4
                  # and 4 has only one digit
 
@@ -27,20 +20,42 @@ persistence(4) # returns 0, because 4 is already a one-dig
 """
 
 
-def persistence(n):
+def persistence1(n):
+    multi_num = 1
+    count = 1
+    len_n = len(str(n))  # length, size
+    
+    if len_n < 2:
+        return count - 1
+    elif len_n >= 2:
+        for len_num in range(len_n):
+            multi_num = multi_num * int(str(n)[len_num])
+
+    while len(str(multi_num)) >= 2:
+        new_multi_num = multi_num
+        multi_num = 1
+        count += 1
+        for len_num in range(len(str(new_multi_num))):
+            multi_num = multi_num * int(str(new_multi_num)[len_num])
+    return count
 
 
 def main():
-	# Output: 3
-	n = 39
-	print(persistence(n))
+    # # Output: 3
+    # n = 39
+    # print(persistence(n))
 
-    assert persistence(39) == 3
-    assert persistence(4) == 0
-    assert persistence(25) == 2
-    assert persistence(999) == 4
+    assert persistence1(39) == 3
+    assert persistence1(4) == 0
+    assert persistence1(25) == 2
+    assert persistence1(999) == 4
+
+    # assert persistence2(39) == 3
+    # assert persistence2(4) == 0
+    # assert persistence2(25) == 2
+    # assert persistence2(999) == 4
 
 
 if __name__ == '__main__':
-	main()
+    main()
 
