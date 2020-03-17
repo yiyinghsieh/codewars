@@ -40,6 +40,35 @@ def persistence1(n):
     return count
 
 
+def _multiply(n_str):
+    # Helper of persistence2(): Compute multiplication of n.
+    multiply = 1
+    for c in n_str:
+        multiply *= int(c)
+    return multiply
+
+
+def persistence2(n):
+    n_str = str(n)
+    length = len(n_str)
+
+    # Edge case for n's lenght is 1.
+    if length == 1:
+        return 0
+
+    counter = 0
+    while length >= 2:
+        # Multiply n and increment counter.
+        n_persist = _multiply(n_str)
+        counter += 1
+
+        # Update n and its length.
+        n_str = str(n_persist)
+        length = len(n_str)
+
+    return counter
+
+
 def main():
     # # Output: 3
     # n = 39
@@ -50,10 +79,10 @@ def main():
     assert persistence1(25) == 2
     assert persistence1(999) == 4
 
-    # assert persistence2(39) == 3
-    # assert persistence2(4) == 0
-    # assert persistence2(25) == 2
-    # assert persistence2(999) == 4
+    assert persistence2(39) == 3
+    assert persistence2(4) == 0
+    assert persistence2(25) == 2
+    assert persistence2(999) == 4
 
 
 if __name__ == '__main__':
