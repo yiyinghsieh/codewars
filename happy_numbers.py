@@ -16,7 +16,7 @@ once the same number occurs multiple times in a sequence because this
 means there is a loop and it will never reach 1.
 For example, the number 7 is a "happy" number:
 (7 ** 2)
-72 = 49 --> 42 + 92 = 97 --> 92 + 72 = 130 --> 12 + 32 + 02 = 
+7^2 = 49 --> 42 + 92 = 97 --> 92 + 72 = 130 --> 12 + 32 + 02 = 
 10 --> 12 + 02 = 1
 Once the sequence reaches the number 1, it will stay there forever 
 since 12 = 1
@@ -31,27 +31,51 @@ repeat this cycle.
 
 Your task is to write a program which will print a list of all happy 
 numbers between 1 and x (both inclusive), where:
-
 2 <= x <= 5000
 """
 
 
-def happy_numbers(n):
+def _sum_squares(num):
+    ss = 0
+    while num > 0:
+        div, digit = num // 10, num % 10
+        ss += digit * digit
+        num = div
+    return ss
 
+
+def _is_happy_number(num):
+    # Check if num is happy number.
+    seens = set()
+    while num > 1:  # stop when num == 1
+        ss = _sum_squares(num)
+        if ss in seens:
+            return False
+
+        seens.add(ss)
+        num = ss
+    return True
+
+
+def happy_numbers(n):
+    result = []
+    for num in range(1, n + 1):
+        # Check if a num is happy number.
+        if _is_happy_number(num):
+            result.append(num)
+    return result
 
 
 def main():
-	Output: [1, 7, 10]
-	n = 10
-	print(happy_numbers(n))
+    # Output: [1, 7, 10]
+    n = 10
+    print(happy_numbers(n))
 
-
-
-	assert happy_numbers(10) == [1, 7, 10]
-	assert happy_numbers(50) == [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49]
-	assert happy_numbers(100) == [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100]
-
+    # assert happy_numbers(10) == [1, 7, 10]
+    # assert happy_numbers(50) == [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49]
+    # assert happy_numbers(100) == [1, 7, 10, 13, 19, 23, 28, 31, 32, 44, 49, 68, 70, 79, 82, 86, 91, 94, 97, 100]
 
 
 if __name__ == '__main__':
-	main()
+    main()
+
