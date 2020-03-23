@@ -41,24 +41,48 @@ A "gap" is more restrictive: there must be no primes in between
 For Go: nil slice is expected when there are no step between m and n. Example: step(2,4900,4919) --> nil
 """
 
+def _is_prime(n):
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 
 def step(g, m, n):
+    # Edge cases.
+    if n - m < g:
+        return None
 
+    i = m
+    while i + g <= n:
+        # Two prime candidates: i, i+g
+        if _is_prime(i) and _is_prime(i + g):
+            return [i, i + g]
+        else:
+            i += 1
+
+    return None
 
 
 def main():
-	# Output: [101, 103]
-	g, m, n = (2,100,110)
-	print(step(g, m, n))
+    import time
+    # # Output: [101, 103]
+    # g, m, n = 2,100,110
+    # print(step(g, m, n))
 
-    assert step(2,100,110) == [101, 103]
-    assert step(4,100,110) == [103, 107]
-    assert step(2,5,5) == None
-    assert step(6,100,110) == [101, 107]
-    assert step(8,300,400) == [359, 367]
-    assert step(10,300,400) == [307, 317]
+    runs = 50
+    start_time = time.time()
+    for _ in range(runs):
+        assert step(2,100,100000) == [101, 103]
+        assert step(4,100,100000) == [103, 107]
+        # assert step(2,100,110) == [101, 103]
+        # assert step(4,100,110) == [103, 107]
+        # assert step(2,5,5) == None
+        # assert step(6,100,110) == [101, 107]
+        # assert step(8,300,400) == [359, 367]
+        # assert step(10,300,400) == [307, 317]
+    print('Time:', (time.time() - start_time) / runs)
 
 
 if __name__ == '__main__':
-	main()
+    main()
 
