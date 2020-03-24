@@ -94,6 +94,31 @@ def step(g, m, n):
 
     return None
 
+# ----------------------------------------------------------------
+
+def step(g, m, n): # run out of time
+    if m == n:
+        return None
+
+    primes = []
+    result = []
+
+    while m <= n:
+        # for i in range(2, m // 2 + 1):
+        for i in range(2, int(m ** 0.5) + 1):
+            if m % i == 0:
+                break
+        if m % i != 0:
+            primes.append(m)
+        m += 1
+    
+    length = len(primes)
+    for i in range(length):
+        if primes[i] and primes[i] + g in primes:
+            result.append(primes[i])
+            result.append(primes[i] + g)
+            return result
+
 
 def main():
     import time
