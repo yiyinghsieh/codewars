@@ -41,6 +41,7 @@ A "gap" is more restrictive: there must be no primes in between
 For Go: nil slice is expected when there are no step between m and n. Example: step(2,4900,4919) --> nil
 """
 
+
 def _is_prime(n):
     for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0:
@@ -59,6 +60,37 @@ def step(g, m, n):
             return [i, i + g]
         else:
             i += 1
+
+    return None
+
+
+def _is_prime(n):
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def step(g, m, n):
+    # Edge cases.
+    if n - m < g:
+        return None
+
+    # Create a dict:num->True or False for checking if prime.
+    num_isprime_d = dict()
+
+    i = m
+    while i + g <= n:
+        # Two prime candidates: i, i+g
+        if i in num_isprime_d and (i + g) not in num_isprime_d:
+            num_isprime_d[i + g] = _is_prime(i + g)
+        elif i not in num_isprime_d and (i + g) not in num_isprime_d:
+            num_isprime_d[i] = _is_prime(i)
+            num_isprime_d[i + g] = _is_prime(i + g)
+
+        if num_isprime_d[i] and num_isprime_d[i + g]:
+            return [i, i + g]
+        
+        i += 1
 
     return None
 
