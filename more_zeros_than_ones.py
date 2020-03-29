@@ -126,6 +126,44 @@ def more_zeros2(s):
     return result
 
 
+#------------------------------------------------------------------
+
+
+def _dedup(s):
+    """Step 2: Deduplicate string in the same order."""
+    # Use set seens to memorize seen chars.
+    s_dedup_ls = []
+    seens = set()
+    for c in s:
+        if c not in seens:
+            seens.add(c)
+            s_dedup_ls.append(c)
+    return s_dedup_ls
+
+
+def _compute_n_zeros_ones(c):
+    """Step 3: Compute number of zeros & ones."""
+    # Compute ascii's binary string, e.g. 0b100.
+    bin_c = bin(ord(c))
+    bin_str = bin_c[2:]
+    return bin_str.count('0'), bin_str.count('1')
+
+
+def more_zeros3(s):
+    """Step 1: main function."""
+    # Deduplicate chars in the same order.
+    s_dedup_ls = _dedup(s)
+
+    # Iterate through chars, compute its ascii's #0s/#1s.
+    result = []
+    for c in s_dedup_ls:
+        n_zeros, n_ones = _compute_n_zeros_ones(c)
+        if n_zeros > n_ones:
+            result.append(c)
+
+    return result
+
+
 def main():
     # # Output: ['a', 'b', 'd']
     # s = 'abbcde'
@@ -147,6 +185,13 @@ def main():
     assert more_zeros2('THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG') == ['T', 'H', 'E', 'Q', 'I', 'C', 'B', 'R', 'F', 'X', 'J', 'P', 'L', 'A', 'D']
     assert more_zeros2('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_') == ['a', 'b', 'd', 'h', 'p', 'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'L', 'P', 'Q', 'R', 'T', 'X', '0']
     assert more_zeros2('DIGEST') == ['D', 'I', 'E', 'T']
+
+    assert more_zeros3('abcde') == ['a', 'b', 'd']
+    assert more_zeros3('thequickbrownfoxjumpsoverthelazydog') == ['h', 'b', 'p', 'a', 'd']
+    assert more_zeros3('THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG') == ['T', 'H', 'E', 'Q', 'I', 'C', 'B', 'R', 'F', 'X', 'J', 'P', 'L', 'A', 'D']
+    assert more_zeros3('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_') == ['a', 'b', 'd', 'h', 'p', 'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'L', 'P', 'Q', 'R', 'T', 'X', '0']
+    assert more_zeros3('DIGEST') == ['D', 'I', 'E', 'T']
+
 
 
 if __name__ == '__main__':
