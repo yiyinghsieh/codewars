@@ -23,6 +23,8 @@ Examples
 All input will be valid strings of length > 0. Leading zeros in binary 
 should not be counted.
 """
+
+
 def _new_s(s):
     s_lst = []
     length = len(s)
@@ -164,6 +166,15 @@ def more_zeros3(s):
     return result
 
 
+def more_zeros4(s):
+    result = []
+    for i in s:
+        bin_str = bin(ord(i))[2:]
+        if bin_str.count('0') > bin_str.count('1') and i not in result:
+            result.append(i)
+    return result
+
+
 def main():
     # # Output: ['a', 'b', 'd']
     # s = 'abbcde'
@@ -172,7 +183,7 @@ def main():
     # print(_ascii_value(s))
     # print(_binary(s))
     # print(_count_1_0_True_False(s))
-    # print(more_zeros(s))
+    # print(more_zeros4(s))
 
     assert more_zeros('abcde') == ['a', 'b', 'd']
     assert more_zeros('thequickbrownfoxjumpsoverthelazydog') == ['h', 'b', 'p', 'a', 'd']
@@ -192,6 +203,11 @@ def main():
     assert more_zeros3('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_') == ['a', 'b', 'd', 'h', 'p', 'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'L', 'P', 'Q', 'R', 'T', 'X', '0']
     assert more_zeros3('DIGEST') == ['D', 'I', 'E', 'T']
 
+    assert more_zeros4('abcde') == ['a', 'b', 'd']
+    assert more_zeros4('thequickbrownfoxjumpsoverthelazydog') == ['h', 'b', 'p', 'a', 'd']
+    assert more_zeros4('THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG') == ['T', 'H', 'E', 'Q', 'I', 'C', 'B', 'R', 'F', 'X', 'J', 'P', 'L', 'A', 'D']
+    assert more_zeros4('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_') == ['a', 'b', 'd', 'h', 'p', 'A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'L', 'P', 'Q', 'R', 'T', 'X', '0']
+    assert more_zeros4('DIGEST') == ['D', 'I', 'E', 'T']
 
 
 if __name__ == '__main__':
