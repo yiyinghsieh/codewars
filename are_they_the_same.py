@@ -72,66 +72,77 @@ def comp(a1, a2):
     return True 
 
 
+def comp1(a1, a2):
+    try:
+        return sorted([i ** 2 for i in a1]) == sorted(a2)
+    except:
+        return False
+
+
+def comp2(a1, a2):
+    return None not in (a1,a2) and [i*i for i in sorted(a1)]==sorted(a2)
+
+
 def main():
-    # # Output: True
-    # a1 = [121, 144, 19, 161, 19, 144, 19, 11]
-    # a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
-    # print(comp(a1,a2))
-   
-    # # # Output: False
-    # a1 = [58, 42, 0, 0, 70, 38, 97]
-    # a2 = [3364, 1764, 0, 1, 4900, 1444, 9409]
-    # print(comp(a1,a2))
-
-    # # # Output: False
-    # a1 = [12, 45, 1, 36, 5, 36]
-    # a2 = [144, 2025, 1, 1296, 25, 1297]
-    # print(comp(a1,a2))
-
-
+    # Output: True
     a1 = [121, 144, 19, 161, 19, 144, 19, 11]
     a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
-    assert comp(a1, a2) == True
-    
-    a1 = [83, 72, 82, 3, 48, 42] 
-    a2 = [6889, 5184, 6724, 9, 2304, 1764]
-    assert comp(a1, a2) == True
-    
-    a1 = [91, 13, 2, 12, 91, 44, 53] 
-    a2 = [8281, 169, 4, 144, 8281, 1936, 2809]
-    assert comp(a1, a2) == True
-    
-    a1 = [7] 
-    a2 = [49]
-    assert comp(a1, a2) == True
-    
-    a1 = [35] 
-    a2 = [1226]
-    assert comp(a1, a2) == False
-    
-    a1 = [90, 22, 92] 
-    a2 = [8100, 484, 8464]
-    assert comp(a1, a2) == True
-
+    print(comp(a1,a2))
+   
+    # # Output: False
     a1 = [58, 42, 0, 0, 70, 38, 97]
     a2 = [3364, 1764, 0, 1, 4900, 1444, 9409]
-    assert comp(a1, a2) == False
+    print(comp1(a1,a2))
 
+    # # Output: False
     a1 = [12, 45, 1, 36, 5, 36]
     a2 = [144, 2025, 1, 1296, 25, 1297]
-    assert comp(a1, a2) == False
+    print(comp2(a1,a2))
 
-    a1 = [] 
-    a2 = [8100, 484, 8464]
-    assert comp(a1, a2) == False
 
-    a1 = [90, 22, 92] 
-    a2 = []
-    assert comp(a1, a2) == False
+    # a1 = [121, 144, 19, 161, 19, 144, 19, 11]
+    # a2 = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
+    # assert comp(a1, a2) == True
+    
+    # a1 = [83, 72, 82, 3, 48, 42] 
+    # a2 = [6889, 5184, 6724, 9, 2304, 1764]
+    # assert comp(a1, a2) == True
+    
+    # a1 = [91, 13, 2, 12, 91, 44, 53] 
+    # a2 = [8281, 169, 4, 144, 8281, 1936, 2809]
+    # assert comp(a1, a2) == True
+    
+    # a1 = [7] 
+    # a2 = [49]
+    # assert comp(a1, a2) == True
+    
+    # a1 = [35] 
+    # a2 = [1226]
+    # assert comp(a1, a2) == False
+    
+    # a1 = [90, 22, 92] 
+    # a2 = [8100, 484, 8464]
+    # assert comp(a1, a2) == True
 
-    a1 = [] 
-    a2 = []
-    assert comp(a1, a2) == True
+    # a1 = [58, 42, 0, 0, 70, 38, 97]
+    # a2 = [3364, 1764, 0, 1, 4900, 1444, 9409]
+    # assert comp(a1, a2) == False
+
+    # a1 = [12, 45, 1, 36, 5, 36]
+    # a2 = [144, 2025, 1, 1296, 25, 1297]
+    # assert comp(a1, a2) == False
+
+    # a1 = [] 
+    # a2 = [8100, 484, 8464]
+    # assert comp(a1, a2) == False
+
+    # a1 = [90, 22, 92] 
+    # a2 = []
+    # assert comp(a1, a2) == False
+
+    # a1 = [] 
+    # a2 = []
+    # assert comp(a1, a2) == True
 
 
 if __name__ == '__main__':
