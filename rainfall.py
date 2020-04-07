@@ -34,81 +34,117 @@ see "Sample Tests:") are adapted from: http://www.worldclimate.com
 import re
 
 
-def _get_towns(data):
-    towns = re.findall('(\S+):', data)
-    return towns
+# def _get_towns(data):
+#     towns = re.findall('(\S+):', data)
+#     return towns
 
 
-def _m_start(months):
-    m_start = []
-    m = 12
-    lengths = len(_get_towns(months))
-    for i in range(1, lengths + 1):
-        m_start.append(i * 12)
-    return m_start
+# def _m_start(months):
+#     m_start = []
+#     m = 12
+#     lengths = len(_get_towns(months))
+#     for i in range(1, lengths + 1):
+#         m_start.append(i * 12)
+#     return m_start
 
 
-def _rainfall(data):
-    rainfall = re.findall('([0-9]+.[0-9]+)', data)
-    return rainfall
+# def _rainfall(data):
+#     rainfall = re.findall('([0-9]+.[0-9]+)', data)
+#     return rainfall
 
 
-def _rainfall_means(means):
-    m_start = _m_start(means)
-    rainfall = _rainfall(means)
-    lengths = len(_get_towns(means))
-    avg_lst = []
-    month = 12
-    count = 0
-    while count < lengths:
-        for i in m_start:
-            sum_i = 0
-            for ii in range(month*count, i):
-                sum_i += float(rainfall[ii])
-            avg = sum_i / month
-            avg_lst.append(avg)
-            count += 1
-    return avg_lst
+# def _rainfall_means(means):
+#     m_start = _m_start(means)
+#     rainfall = _rainfall(means)
+#     lengths = len(_get_towns(means))
+#     avg_lst = []
+#     month = 12
+#     count = 0
+#     while count < lengths:
+#         for i in m_start:
+#             sum_i = 0
+#             for ii in range(month*count, i):
+#                 sum_i += float(rainfall[ii])
+#             avg = sum_i / month
+#             avg_lst.append(avg)
+#             count += 1
+#     return avg_lst
 
 
-def _rainfall_var(variance):
-    m_start = _m_start(variance)
-    rainfall = _rainfall(variance)
-    lengths = len(_get_towns(variance))
-    avg_lst = _rainfall_means(variance)
-    var_lst = []
-    month = 12
-    count = 0
-    while count < lengths:
-        for i in m_start:
-            sum_i = 0
-            for ii in range(month*count, i):
-                sum_i += (float(rainfall[ii]) - (avg_lst[count])) **2
-            var = sum_i / month
-            var_lst.append(var)
-            count += 1
-    return var_lst
+# def _rainfall_var(variance):
+#     m_start = _m_start(variance)
+#     rainfall = _rainfall(variance)
+#     lengths = len(_get_towns(variance))
+#     avg_lst = _rainfall_means(variance)
+#     var_lst = []
+#     month = 12
+#     count = 0
+#     while count < lengths:
+#         for i in m_start:
+#             sum_i = 0
+#             for ii in range(month*count, i):
+#                 sum_i += (float(rainfall[ii]) - (avg_lst[count])) **2
+#             var = sum_i / month
+#             var_lst.append(var)
+#             count += 1
+#     return var_lst
 
 
-def mean(town, strng):
-    towns = _get_towns(strng)
-    avg_lst = _rainfall_means(strng)
-    for t, a in zip(towns, avg_lst):
-        if t == town:
-            return a
-    else:
-        return -1
+# def mean(town, strng):
+#     towns = _get_towns(strng)
+#     avg_lst = _rainfall_means(strng)
+#     for t, a in zip(towns, avg_lst):
+#         if t == town:
+#             return a
+#     else:
+#         return -1
 
 
-def variance(town, strng):
-    towns = _get_towns(strng)
-    var_lst = _rainfall_var(strng)
-    for t, v in zip(towns, var_lst):
-        if t == town:
-            return v
-    else:
-        return -1
+# def variance(town, strng):
+#     towns = _get_towns(strng)
+#     var_lst = _rainfall_var(strng)
+#     for t, v in zip(towns, var_lst):
+#         if t == town:
+#             return v
+#     else:
+#         return -1
   
+#-----------------------------------------------------------------
+
+def _get_towns_stats(strng):
+    town_stats_d = {}
+
+    towns_strng = strng.split('\n')
+    for ts in towns_strng:
+        town_split = ts.split(':')
+        town, month_rainfalls = town_split[0], town_split[1].split(',')
+        rainfalls = [float(mr.split(' ')[1]) for mr in month_rainfalls]
+        # print(rainfalls)
+
+        n = len(rainfalls)
+        _mean = sum(rainfalls) / n
+        # print(_mean)
+        _var = sum([(r - _mean) ** 2 for r in rainfalls]) / n
+        # print(_variance)
+        town_stats_d[town] = {'mean': _mean, 'var': _var}
+    return town_stats_d
+
+
+def mean_split(town, strng):
+    town_stats_d = _get_towns_stats(strng)
+    if town in town_stats_d:
+        return town_stats_d[town]['mean']
+    else:
+        return -1
+
+
+def variance_split(town, strng):
+    town_stats_d = _get_towns_stats(strng)
+    if town in town_stats_d:
+        return town_stats_d[town]['var']
+    else:
+        return -1
+
 
 def main():
     # # Output:
@@ -128,8 +164,9 @@ def main():
     # print(_rainfall(data))
     # print(_rainfall_means(data))
     # print(_rainfall_var(data))
+    print(_get_towns_stats(data))
     
-    # print(mean("London", data))  #mean(town, strng):
+    # print(mean_("London", data))  #mean(town, strng):
     # print(mean("Rome", data))
     # print(mean("Caracas", data))
     # print(mean("Vancouver", data))
@@ -138,22 +175,31 @@ def main():
     # print(variance("Caracas", data))
     # print(variance("Vancouver", data))
 
-    towns = ["Rome", "London", "Paris", "NY", "Vancouver", "Sydney", "Bangkok", "Tokyo",
-             "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
 
-    def assertFuzzyEquals(actual, expected):
-        merr = 1e-2   # 1 * 10^-2
-        inrange = abs(actual - expected) <= merr
-        msg = ""
-        if (inrange == False):
-            msg = "abs(actual - expected) must be <= 1e-2. With 10 decimals: Expected was {:.10f} but got {:.10f}".format(expected, actual)
-            raise Exception(msg)
 
-    assertFuzzyEquals(mean("London", data), 51.199999999999996)
-    assertFuzzyEquals(mean("Beijing", data), 52.416666666666664)
+    print(mean_split("London", data))  #mean(town, strng):
+    print(mean_split("Rome", data))
+    print(mean_split("Caracas", data))
+    print(variance_split("London", data))
+    print(variance_split("Rome", data))
+    print(variance_split("Caracas", data))
 
-    assertFuzzyEquals(variance("London", data), 57.42833333333374)
-    assertFuzzyEquals(variance("Beijing", data), 4808.37138888889)
+    # towns = ["Rome", "London", "Paris", "NY", "Vancouver", "Sydney", "Bangkok", "Tokyo",
+    #          "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
+
+    # def assertFuzzyEquals(actual, expected):
+    #     merr = 1e-2   # 1 * 10^-2
+    #     inrange = abs(actual - expected) <= merr
+    #     msg = ""
+    #     if (inrange == False):
+    #         msg = "abs(actual - expected) must be <= 1e-2. With 10 decimals: Expected was {:.10f} but got {:.10f}".format(expected, actual)
+    #         raise Exception(msg)
+
+    # assertFuzzyEquals(mean("London", data), 51.199999999999996)
+    # assertFuzzyEquals(mean("Beijing", data), 52.416666666666664)
+
+    # assertFuzzyEquals(variance("London", data), 57.42833333333374)
+    # assertFuzzyEquals(variance("Beijing", data), 4808.37138888889)
 
 
 if __name__ == '__main__':
