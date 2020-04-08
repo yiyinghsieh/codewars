@@ -34,82 +34,84 @@ see "Sample Tests:") are adapted from: http://www.worldclimate.com
 import re
 
 
-# def _get_towns(data):
-#     towns = re.findall('(\S+):', data)
-#     return towns
+def _get_towns(data):
+    towns = re.findall('(\S+):', data)
+    return towns
 
 
-# def _m_start(months):
-#     m_start = []
-#     m = 12
-#     lengths = len(_get_towns(months))
-#     for i in range(1, lengths + 1):
-#         m_start.append(i * 12)
-#     return m_start
+def _m_start(months):
+    m_start = []
+    m = 12
+    lengths = len(_get_towns(months))
+    for i in range(1, lengths + 1):
+        m_start.append(i * 12)
+    return m_start
 
 
-# def _rainfall(data):
-#     rainfall = re.findall('([0-9]+.[0-9]+)', data)
-#     return rainfall
+def _rainfall(data):
+    rainfall = re.findall('([0-9]+.[0-9]+)', data)
+    return rainfall
 
 
-# def _rainfall_means(means):
-#     m_start = _m_start(means)
-#     rainfall = _rainfall(means)
-#     lengths = len(_get_towns(means))
-#     avg_lst = []
-#     month = 12
-#     count = 0
-#     while count < lengths:
-#         for i in m_start:
-#             sum_i = 0
-#             for ii in range(month*count, i):
-#                 sum_i += float(rainfall[ii])
-#             avg = sum_i / month
-#             avg_lst.append(avg)
-#             count += 1
-#     return avg_lst
+def _rainfall_means(means):
+    m_start = _m_start(means)
+    rainfall = _rainfall(means)
+    lengths = len(_get_towns(means))
+    avg_lst = []
+    month = 12
+    count = 0
+    while count < lengths:
+        for i in m_start:
+            sum_i = 0
+            for ii in range(month*count, i):
+                sum_i += float(rainfall[ii])
+            avg = sum_i / month
+            avg_lst.append(avg)
+            count += 1
+    return avg_lst
 
 
-# def _rainfall_var(variance):
-#     m_start = _m_start(variance)
-#     rainfall = _rainfall(variance)
-#     lengths = len(_get_towns(variance))
-#     avg_lst = _rainfall_means(variance)
-#     var_lst = []
-#     month = 12
-#     count = 0
-#     while count < lengths:
-#         for i in m_start:
-#             sum_i = 0
-#             for ii in range(month*count, i):
-#                 sum_i += (float(rainfall[ii]) - (avg_lst[count])) **2
-#             var = sum_i / month
-#             var_lst.append(var)
-#             count += 1
-#     return var_lst
+def _rainfall_var(variance):
+    m_start = _m_start(variance)
+    rainfall = _rainfall(variance)
+    lengths = len(_get_towns(variance))
+    avg_lst = _rainfall_means(variance)
+    var_lst = []
+    month = 12
+    count = 0
+    while count < lengths:
+        for i in m_start:
+            sum_i = 0
+            for ii in range(month*count, i):
+                sum_i += (float(rainfall[ii]) - (avg_lst[count])) **2
+            var = sum_i / month
+            var_lst.append(var)
+            count += 1
+    return var_lst
 
 
-# def mean(town, strng):
-#     towns = _get_towns(strng)
-#     avg_lst = _rainfall_means(strng)
-#     for t, a in zip(towns, avg_lst):
-#         if t == town:
-#             return a
-#     else:
-#         return -1
+def mean(town, strng):
+    towns = _get_towns(strng)
+    avg_lst = _rainfall_means(strng)
+    for t, a in zip(towns, avg_lst):
+        if t == town:
+            return a
+    else:
+        return -1
 
 
-# def variance(town, strng):
-#     towns = _get_towns(strng)
-#     var_lst = _rainfall_var(strng)
-#     for t, v in zip(towns, var_lst):
-#         if t == town:
-#             return v
-#     else:
-#         return -1
+def variance(town, strng):
+    towns = _get_towns(strng)
+    var_lst = _rainfall_var(strng)
+    for t, v in zip(towns, var_lst):
+        if t == town:
+            return v
+    else:
+        return -1
   
-#-----------------------------------------------------------------
+
+-----------------------------------------------------------------
+
 
 def _get_towns_stats(strng):
     town_stats_d = {}
@@ -146,6 +148,39 @@ def variance_split(town, strng):
         return -1
 
 
+-------------------------------------------------------------------
+
+
+def _get_town_randfall(town, strng):
+    towns_strng = re.search('{}\:.+'.format(town), strng)
+    if towns_strng:
+        rainfalls = [float(mr.split(' ')[1])
+                    for mr in towns_strng.group().split(':')[1].split(',')] 
+        # print(rainfalls)
+        n = len(rainfalls)
+        _mean = sum(rainfalls) / n
+        _var = sum([(r - _mean )** 2 for r in rainfalls]) / n
+        return {'mean': _mean, 'var': _var}
+    else:
+        {}
+
+
+def mean_re(town, strng):
+    stats_d = _get_town_randfall(town, strng)
+    if stats_d:
+        return stats_d['mean']
+    else:
+        -1
+
+
+def variance_re(town, strng):
+    stats_d = _get_town_randfall(town, strng)
+    if stats_d:
+        return stats_d['var']
+    else:
+        -1
+
+
 def main():
     # # Output:
     data = """Rome:Jan 81.2,Feb 63.2,Mar 70.3,Apr 55.7,May 53.0,Jun 36.4,Jul 17.5,Aug 27.5,Sep 60.9,Oct 117.7,Nov 111.0,Dec 97.9
@@ -164,7 +199,8 @@ Lima:Jan 1.2,Feb 0.9,Mar 0.7,Apr 0.4,May 0.6,Jun 1.8,Jul 4.4,Aug 3.1,Sep 3.3,Oct
     # print(_rainfall(data))
     # print(_rainfall_means(data))
     # print(_rainfall_var(data))
-    print(_get_towns_stats(data))
+    # print(_get_towns_stats(data))
+    print(_get_town_randfall('London', data))
     
     # print(mean_("London", data))  #mean(town, strng):
     # print(mean("Rome", data))
@@ -175,15 +211,21 @@ Lima:Jan 1.2,Feb 0.9,Mar 0.7,Apr 0.4,May 0.6,Jun 1.8,Jul 4.4,Aug 3.1,Sep 3.3,Oct
     # print(variance("Caracas", data))
     # print(variance("Vancouver", data))
 
+    # print(mean_split("London", data))  #mean(town, strng):
+    # print(mean_split("Rome", data))
+    # print(mean_split("Caracas", data))
+    # print(variance_split("London", data))
+    # print(variance_split("Rome", data))
+    # print(variance_split("Caracas", data))
 
+    print(mean_re("London", data))  
+    print(mean_re("Rome", data))
+    print(mean_re("Caracas", data))
+    print(variance_re("London", data))
+    print(variance_re("Rome", data))
+    print(variance_re("Caracas", data))
 
-    print(mean_split("London", data))  #mean(town, strng):
-    print(mean_split("Rome", data))
-    print(mean_split("Caracas", data))
-    print(variance_split("London", data))
-    print(variance_split("Rome", data))
-    print(variance_split("Caracas", data))
-
+   
     # towns = ["Rome", "London", "Paris", "NY", "Vancouver", "Sydney", "Bangkok", "Tokyo",
     #          "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
 
