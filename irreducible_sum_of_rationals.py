@@ -53,22 +53,36 @@ See sample tests for more examples and the form of results.
 
 
 def sum_fracts(lst):
+    from fractions import Fraction
 
+    if not lst:
+        return None
 
+    sum_i = 0
+    for i in lst:
+        sum_i += Fraction(i[0], i[1])
+    if sum_i.numerator % sum_i.denominator == 0:
+        return sum_i
+    else:
+        num_den = sum_i.numerator, sum_i.denominator
+        return list(num_den)
 
 
 def main():
-    # Output:[13, 12]
-    lst = [[1, 2], [1, 3], [1, 4]]
-    print(sum_fracts(lst))
-
+    # # Output:[13, 12]
+    # lst = [[1, 2], [1, 3], [1, 4]]
+    # print(sum_fracts(lst))
+    # # Output: 2
+    # lst = [[1, 3], [5, 3]]
+    # print(sum_fracts(lst))
+    # # Output: None
+    # lst = []
+    # print(sum_fracts(lst))
 
     assert sum_fracts([[1, 2], [1, 3], [1, 4]]) == [13, 12]
     assert sum_fracts([[1, 3], [5, 3]]) == 2
 
 
 if __name__ == '__main__':
-    mian()
-
-
+    main()
 
