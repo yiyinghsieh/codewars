@@ -27,33 +27,28 @@ Examples:
 """
 
 
-def find_missing_number(numbers):
-
+def find_missing_number2(numbers):
+    n = len(numbers) + 1
+    series_sum = (1 + n) * n / 2
+    return series_sum - sum(numbers)
 
 
 def main():
-	# Output: 1
-	numbers = [2, 3, 4]
-	print(find_missing_number(numbers))
+    # # Output: 1   
+    # numbers = [2, 3, 4]
+    # print(find_missing_number(numbers))
 
+    # assert find_missing_number([2, 3, 4]) == 1
+    # assert find_missing_number([1, 3, 4]) == 2
+    # assert find_missing_number([1, 2, 4]) == 3
+    # assert find_missing_number([1, 2, 3]) == 4
 
-# Test.assert_equals(find_missing_number([2, 3, 4]), 1)
-# Test.assert_equals(find_missing_number([1, 3, 4]), 2)
-# Test.assert_equals(find_missing_number([1, 2, 4]), 3)
-# Test.assert_equals(find_missing_number([1, 2, 3]), 4)
-
+    assert find_missing_number2([2, 3, 4]) == 1
+    assert find_missing_number2([1, 3, 4]) == 2
+    assert find_missing_number2([1, 2, 4]) == 3
+    assert find_missing_number2([1, 2, 3]) == 4
 
 
 if __name__ == '__main__':
-	main()
-
-
-
-
-
-
-
-
-
-
+    main()
 
