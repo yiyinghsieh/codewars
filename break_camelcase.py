@@ -11,7 +11,16 @@ solution("camelCasing")  ==  "camel Casing"
 """
 
 
-def solution(s):
+def solution1(s):
+    lst = []
+    for i in s:
+        if i.isupper():
+            lst.append(' ')
+        lst.append(i)
+    return ''.join(lst)
+
+
+def solution2(s):
     import string
     n = len(s)
     lst = []
@@ -33,9 +42,14 @@ def main():
     # s = "breakCamelCase"
     # print(solution(s))
 
-    assert solution("helloWorld") == "hello World"
-    assert solution("camelCase") == "camel Case"
-    assert solution("breakCamelCase") == "break Camel Case"
+    assert solution1("helloWorld") == "hello World"
+    assert solution1("camelCase") == "camel Case"
+    assert solution1("breakCamelCase") == "break Camel Case"
+
+    assert solution2("helloWorld") == "hello World"
+    assert solution2("camelCase") == "camel Case"
+    assert solution2("breakCamelCase") == "break Camel Case"
+
 
 
 if __name__ == '__main__':
