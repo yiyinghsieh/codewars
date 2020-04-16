@@ -11,6 +11,22 @@ solution("camelCasing")  ==  "camel Casing"
 """
 
 
+def solution(s):
+    import string
+    
+    uppercase = set(string.ascii_uppercase)
+    i = 0
+    while i < len(s):
+        # 'helloWorld' => 'hello World'
+        #  0123456789
+        if s[i] in uppercase:
+            s = s[:i] + ' ' + s[i:]
+            i += 1
+        i += 1
+
+    return s
+
+
 def solution1(s):
     lst = []
     for i in s:
@@ -41,6 +57,10 @@ def main():
     # # Output: "break Camel Case" 
     # s = "breakCamelCase"
     # print(solution(s))
+
+    assert solution("helloWorld") == "hello World"
+    assert solution("camelCase") == "camel Case"
+    assert solution("breakCamelCase") == "break Camel Case"
 
     assert solution1("helloWorld") == "hello World"
     assert solution1("camelCase") == "camel Case"
