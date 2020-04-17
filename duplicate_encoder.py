@@ -23,23 +23,28 @@ expected result, not the input!
 
 
 def duplicate_encode(word):
-
+    dic = dict()
+    lst = []
+    for i in word.lower():
+        dic[i] = dic.get(i, 0) + 1
+    for i in word.lower():
+        if dic[i] > 1:
+            lst.append(')')
+        else:
+            lst.append('(')
+    return ''.join(lst)
 
 
 def main():
-	# Output: "((("
-	word: "din"
-	print(duplicate_encode)
+    # # Output: "((("
+    # word = "din"
+    # print(duplicate_encode(word))
 
-
-	assert duplicate_encode("din") == "((("
-	assert duplicate_encode("recede") == "()()()"
-	assert duplicate_encode("Success") == ")())())","should ignore case"
-	assert duplicate_encode("(( @") == "))(("
-
+    assert duplicate_encode("din") == "((("
+    assert duplicate_encode("recede") == "()()()"
+    assert duplicate_encode("Success") == ")())())"
+    assert duplicate_encode("(( @") == "))(("
 
 if __name__ == '__main__':
-	main()
-
-
+    main()
 
