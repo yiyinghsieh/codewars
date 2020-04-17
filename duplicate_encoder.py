@@ -45,6 +45,10 @@ def duplicate_encode1(word):
     return ''.join(lst)
 
 
+def duplicate_encode2(word):
+    return ''.join(['(' if word.lower().count(i) == 1 else ')' for i in word.lower()])
+
+
 def main():
     # # Output: "((("
     # word = "din"
@@ -59,6 +63,11 @@ def main():
     assert duplicate_encode1("recede") == "()()()"
     assert duplicate_encode1("Success") == ")())())"
     assert duplicate_encode1("(( @") == "))(("
+
+    assert duplicate_encode2("din") == "((("
+    assert duplicate_encode2("recede") == "()()()"
+    assert duplicate_encode2("Success") == ")())())"
+    assert duplicate_encode2("(( @") == "))(("
 
 if __name__ == '__main__':
     main()
