@@ -39,19 +39,29 @@ digital_root(493193)
 
 
 def digital_root(n):
-
-
+    sum_i = 0
+    for i in str(n):
+        sum_i += int(i)
+    length = len(str(sum_i))
+    
+    if length < 2:
+        return sum_i
+    else:
+        while length > 1:
+            sum_ii = 0
+            for j in str(sum_i):
+                sum_ii += int(j)
+    return sum_ii
 
 
 def main():
-	# Output: 7
-	n = 16
-	print(digital_root)
+    # Output: 7
+    n = 16
+    print(digital_root(n))
 
-
-    assert digital_root(16) == 7 
-    assert digital_root(456) == 6
+    # assert digital_root(16) == 7 
+    # assert digital_root(456) == 6
 
 if __name__ == '__main__':
-	main()
+    main()
 
