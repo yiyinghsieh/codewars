@@ -51,16 +51,38 @@ def digital_root(n):
             sum_ii = 0
             for j in str(sum_i):
                 sum_ii += int(j)
+            length = len(str(sum_ii))
     return sum_ii
 
 
-def main():
-    # Output: 7
-    n = 16
-    print(digital_root(n))
+def digital_root1(n):
+    while n > 10:
+        n = sum([int(i) for i in str(n)])
+    return n
 
-    # assert digital_root(16) == 7 
-    # assert digital_root(456) == 6
+
+def digital_root2(n):
+    while n > 10:
+        sum_n = 0
+        for i in str(n):
+            sum_n += int(i)
+            n = sum_n
+    return n
+
+
+def main():
+    # # Output: 7
+    # n = 456
+    # print(digital_root(n))
+
+    assert digital_root(16) == 7 
+    assert digital_root(456) == 6
+
+    assert digital_root1(16) == 7 
+    assert digital_root1(456) == 6
+
+    assert digital_root2(16) == 7 
+    assert digital_root2(456) == 6
 
 if __name__ == '__main__':
     main()
