@@ -26,27 +26,42 @@ More examples in test cases. Good luck!
 
 
 def solve(s):
+    import string
+    a_z = string.ascii_lowercase
+    vowels = 'aeiou'
+    s_lst = []
+    for i in s:
+        if i not in vowels:
+            s_lst.append(i)
+        else:
+            s_lst.append('')
 
-
-
+    s_max = []
+    s_sum = 0
+    for j in s_lst:
+        for i, c in enumerate(a_z):
+            if j == c:
+                s_sum += i + 1
+                s_max.append(s_sum)
+            elif j == '':
+                s_sum = 0
+    return(max(s_max))
 
 
 def main():
-	# Output: 26
-	s = "zodiac"
-	print(solve(s))
+    # # Output: 26
+    # s = "khrushchev"
+    # print(solve(s))
 
-Test.it("Basic tests")
-Test.assert_equals(solve("zodiac"),26)
-Test.assert_equals(solve("chruschtschov"),80)
-Test.assert_equals(solve("khrushchev"),38)
-Test.assert_equals(solve("strength"),57)
-Test.assert_equals(solve("catchphrase"),73)
-Test.assert_equals(solve("twelfthstreet"),103)
-Test.assert_equals(solve("mischtschenkoana"),80)
+    assert solve("zodiac") == 26
+    assert solve("chruschtschov") == 80
+    assert solve("khrushchev") == 38
+    assert solve("strength") == 57
+    assert solve("catchphrase") == 73
+    assert solve("twelfthstreet") == 103
+    assert solve("mischtschenkoana") == 80
 
 
 if __name__ == '__main__':
-	main()
-
+    main()
 
