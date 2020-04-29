@@ -47,10 +47,23 @@ def solve(s):
                 s_sum = 0
     return(max(s_max))
 
+def solve1(s):
+    max_s = 0
+    add_s = 0
+    vowels = 'aeiou'
+    for i in s:
+        if i not in vowels:
+            add_s += ord(i) - 97 + 1
+        else:
+            add_s = 0
+        if add_s > max_s:
+            max_s = add_s
+    return max_s
+
 
 def main():
     # # Output: 26
-    # s = "khrushchev"
+    # s = "zodiac"
     # print(solve(s))
 
     assert solve("zodiac") == 26
@@ -60,6 +73,14 @@ def main():
     assert solve("catchphrase") == 73
     assert solve("twelfthstreet") == 103
     assert solve("mischtschenkoana") == 80
+
+    assert solve1("zodiac") == 26
+    assert solve1("chruschtschov") == 80
+    assert solve1("khrushchev") == 38
+    assert solve1("strength") == 57
+    assert solve1("catchphrase") == 73
+    assert solve1("twelfthstreet") == 103
+    assert solve1("mischtschenkoana") == 80
 
 
 if __name__ == '__main__':
