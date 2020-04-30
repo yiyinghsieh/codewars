@@ -44,15 +44,31 @@ written.
 
 
 def decode(r):
-    # your code
-    pass
+    import re
+    import string
+    num = re.findall('[0-9]+', r)[0]
+    words = re.findall('[a-z]+', r)[0]
+    lst = []
+
+    for i in words:
+        x = (ord(i) - ord('a'))
+        for ii in range(26):
+            if ii * int(num) % 26 == x:
+                lst.append(ii)
+    result = []
+    for j in lst:
+        for i, c in enumerate(string.ascii_lowercase):
+            if j == i:
+                result.append(c)
+    if len(result) > len(words):
+        return 'Impossible to decode'
+    return ''.join(result)
 
 
-
-def main()
-	# Output: "uogbucwnddunktsjfanzlurnyxmx"
-	r = "1273409kuqhkoynvvknsdwljantzkpnmfgf"
-	print(decode(r))
+def main():
+    # Output: "uogbucwnddunktsjfanzlurnyxmx"
+    r = "1273409kuqhkoynvvknsdwljantzkpnmfgf"
+    print(decode(r))
 
 # @test.describe('Tests')
      
@@ -60,7 +76,6 @@ def main()
 #     def testing_decode(s, exp):
 #         actual = decode(s)
 #         Test.assert_equals(actual, exp)
-        
 #     @test.it('Basic Tests')
 #     def basic_tests1():
 #         testing_decode("1273409kuqhkoynvvknsdwljantzkpnmfgf", "uogbucwnddunktsjfanzlurnyxmx")
@@ -70,6 +85,5 @@ def main()
         
 
 if __name__ == '__main__':
-	main()
-
+    main()
 
