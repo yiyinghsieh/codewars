@@ -18,14 +18,27 @@ Examples
 [4, 3, 1, 5, 6]   -->  [[1, 3], [3, 5], [4, 6]]
 """
 
+
 def twos_difference(lst): 
-    # your code here
-    pass
+    s = set(lst)
+    diff2 = []
+    for i in lst:
+        if i + 2 in s:
+            diff2.append((i, i + 2))
+    return sorted(diff2)
 
 
 def main():
-    # Output: [(1, 3), (2, 4)]
-    lst = [1, 2, 3, 4]
+    # # Output: [(1, 3), (2, 4)]
+    # lst = [1, 2, 3, 4]
+    # print(twos_difference(lst))
+
+    # Output: [(1, 3), (3, 5), (4, 6)]
+    lst = [6, 3, 4, 1, 5]
+    print(twos_difference(lst))
+
+    # Output: [(1, 3), (3, 5), (4, 6)]
+    lst = [1, 3, 5, 6, 8, 10, 15, 32, 12, 14, 56]
     print(twos_difference(lst))
 
     # assert twos_difference([1, 2, 3, 4]) == [(1, 3), (2, 4)]
