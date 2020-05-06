@@ -43,6 +43,12 @@ decode("1010111111011011011111001100") -> "0011121314"
 """
 
 
+def _encode(c):
+    c_bin = bin(int(c))[2:]
+    k = len(c_bin)
+    return '0' * (k - 1) + '1' + c_bin
+
+
 # def code(strng):
 #     result = []
 #     for c in strng:
@@ -56,32 +62,25 @@ decode("1010111111011011011111001100") -> "0011121314"
 #     return ''.join(result)
 
 def decode(strng):
-    n = '9876543210'
-    lst = []
-    for c in n:
-        c_bin = bin(int(c))[2:]
-        b_c = (len(c_bin) - 1) * '0' + '1' + c_bin
-        lst.append((c, b_c))
-    print(lst)
+    nums = '9876543210'
+    nums_codes = []
+    for num in nums:
+        code = _encode(num)
+        nums_codes.append((num, code))
+    print(nums_codes)
     
     result = []
-    length = len(strng)
-    count = 0
-    count_1 = 0
-    while count < length:
-        for num, num_bin in lst:
-            if num_bin in strng[count : count_1]:
-                print(num_bin, strng[count: count_1])
+    n = len(strng)
+    i = 0
+    while i < n:
+        for num, code in nums_codes:
+            if code == strng[i:(i+len(code))]:
+                # print(code, strng[i:j])
                 result.append(num)
-                # count = len(num_bin)
-                count = count_1
-                # count_1 += 1
-                # break
-            
-            count_1 += 1
-    return result
+                i += len(code)
+                break
 
-
+    return ''.join(result)
 
 
 def main():
