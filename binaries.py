@@ -12,11 +12,8 @@ we will code each.
 
 Coding process to code a number n expressed in base 10:
 a) Let k be the number of bits of n
-
 b) Put k-1 times the digit 0 followed by the digit 1
-
 c) Put number n in binary
-
 d) Concat the result of b) and c)
 
 So we code 0 as 10, 1 as 11 ... etc...
@@ -49,17 +46,13 @@ def _encode(c):
     return '0' * (k - 1) + '1' + c_bin
 
 
-# def code(strng):
-#     result = []
-#     for c in strng:
-#         c_bin = bin(int(c))[2:]
-#         # print(i_bin)
-#         b = (len(c_bin) - 1) * '0' + '1'
-#         # print(b)
-#         b_c = b + c_bin
-#         # print(b_c) 
-#         result.append(b_c)
-#     return ''.join(result)
+def code(strng):
+    result = []
+    for c in strng:
+        c_bin = _encode(c)
+        result.append(c_bin)
+    return ''.join(result)
+
 
 def decode(strng):
     nums = '9876543210'
@@ -67,47 +60,41 @@ def decode(strng):
     for num in nums:
         code = _encode(num)
         nums_codes.append((num, code))
-    print(nums_codes)
     
     result = []
     n = len(strng)
     i = 0
     while i < n:
-        for num, code in nums_codes:
+        for num, code in nums_codes:  
+        # digit_code_d = {d: _encode(str(d)) for d in range(10)}
+        # code = digit_code_d[d]
             if code == strng[i:(i+len(code))]:
-                # print(code, strng[i:j])
                 result.append(num)
                 i += len(code)
                 break
-
     return ''.join(result)
 
 
 def main():
+    # code Output: "11101111110110110111"
+    strng = "10111213"
+    print(code(strng))
+    print('11101111110110110111')
 
-    # # # code Output: "110110011100110000110100111000111100011000"
-    # strng = "0123456789"
-    # print(code(strng))
-    
-    # # code Output: "11101111110110110111"
-    # strng = "10111213"
-    # print(code(strng))
-    # print('11101111110110110111')
-
-    # # code Output: "0011100110"
-    # strng = "62"
-    # print(code(strng))
-    # print('0011100110')
+    # code Output: "0011100110"
+    strng = "62"
+    print(code(strng))
+    print('0011100110')
 
     # decode Output: "07"
     strng = "10001111"
     print(decode(strng))
-    # print('10001111')
+    print('07')
 
-    # # decode Output: "444666333666777444"
-    # strng = "001100001100001100001110001110001110011101110111001110001110001110001111001111001111001100001100001100"
-    # print(decode(strng))
-    # print('001100001100001100001110001110001110011101110111001110001110001110001111001111001111001100001100001100')
+    # decode Output: "444666333666777444"
+    strng = "001100001100001100001110001110001110011101110111001110001110001110001111001111001111001100001100001100"
+    print(decode(strng))
+    print('444666333666777444')
 
 # @test.describe('Tests')
         
@@ -139,8 +126,4 @@ def main():
         
 if __name__ == '__main__':
     main()
-
-
-
-
 
