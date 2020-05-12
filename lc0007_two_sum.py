@@ -26,174 +26,87 @@ class Solution(object):
         :rtype: List[int]
         """
         l = len(nums)
-        # l_half = round(l/2)
         l_half = l // 2
-        # result = []
         num_sort = sorted(nums)
+        
         if target < num_sort[l_half]:
             for i in range(l):
                 for ii in range(l):
-                    # print(i, ii)
                     if i == ii:
                         continue
                     if num_sort[i] + num_sort[ii] == target:
-                        # return [i, ii]
-                        # result.append([num_sort[i], num_sort[ii]])
-                        newnum = [num_sort[i]] + [num_sort[ii]]
-                        print(newnum)
-                        # resultt = []
+                        newnum = [num_sort[i], num_sort[ii]]
                         ans = []
                         for ii in newnum:
-                        # for i, c in enumerate(nums):
-                            # print(i, c)
                             for i, c in enumerate(nums):
-                            # for ii in newnum:
                                 if ii == c and i not in ans:
                                     ans += [i]
                                     break 
-                                    # resultt.append(i)
-                        # return resultt
-                        # return ans[:2]
                         return sorted(ans)
-                                
-        
-
         elif target > num_sort[l_half] * 2:
             for i in range(l):
                 for ii in range(l):
                     if i == ii:
                         continue
                     if num_sort[-i] + num_sort[-ii] == target:
-                        # return [ii, i]
                         newnum = [num_sort[-i]] + [num_sort[-ii]]
-                        print(newnum)
                         ans = []
                         for ii in newnum:
-                        # for i, c in enumerate(nums):
-                            # print(i, c)
                             for i, c in enumerate(nums):
-                            # for ii in newnum:
                                 if ii == c and i not in ans:
                                     ans += [i]
                                     break 
-                                    # resultt.append(i)
-                        # return resultt
                         return sorted(ans)
         else:
-            for i in range(l_half, l):
+            for i in range(l):
                 for ii in range(l):
                     if i == ii:
                         continue
                     if num_sort[i] + num_sort[ii] == target:
                         newnum = [num_sort[i]] + [num_sort[ii]]
-                        print(newnum)
                         ans = []
                         for ii in newnum:
-                        # for i, c in enumerate(nums):
-                            # print(i, c)
                             for i, c in enumerate(nums):
-                            # for ii in range(2):
                                 if ii == c and i not in ans:
                                     ans += [i]
                                     break 
-                                    # resultt.append(i)
-                        # return resultt
-                        # return ans[:2]
                         return sorted(ans)
 
 
+class Solution(object):
+    def twoSum(self, nums, target):
+    n = len(nums)
+        for i in range(n - 1):
+            for j in range(i + 1, n):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
 
-        # l = len(nums)
-        # l_half = l // 2
-        # # nums = sorted(nums)
-        # if target < nums[l_half]:
-        #     for i in range(l):
-        #         for ii in range(l):
-        #             # print(i, ii)
-        #             if i == ii:
-        #                 continue
-        #             if nums[i] + nums[ii] == target:
-        #                 return sorted([i, ii])
-        #                 # result.append([nums[i], nums[ii]])
-        #                 newnum = [nums[i]] + [nums[ii]]
-        #                 print(newnum)
-        #                 # resultt = []
-        #                 # ans = []
-        #                 # for i, c in enumerate(nums):
-        #                 #     for ii in range(2):
-        #                 #         if newnum[ii] == c:
-        #                 #             ans += [i] 
-        #                 #             # resultt.append(i)
-        #                 # # return resultt
-        #                 # return ans
-                                
-        
-
-        # elif target > nums[l_half] * 2:
-        #     for i in range(l):
-        #         for ii in range(l):
-        #             if i == ii:
-        #                 continue
-        #             if nums[-i] + nums[-ii] == target:
-        #                 return sorted([i, ii])
-        #                 newnum = [nums[-i]] + [nums[-ii]]
-        #                 print(newnum)
-        #                 # ans = []
-        #                 # for i, c in enumerate(nums):
-        #                 #     for ii in range(2):
-        #                 #         if newnum[ii] == c:
-        #                 #             ans += [i] 
-        #                 #             # resultt.append(i)
-        #                 # # return resultt
-        #                 # return ans
-        # else:
-        #     for i in range(l_half, l):
-        #         for ii in range(l):
-        #             if i == ii:
-        #                 continue
-        #             if nums[i] + nums[ii] == target:
-        #                 return sorted([i, ii])
-        #                 newnum = [nums[i]] + [nums[ii]]
-        #                 print(newnum)
-        #                 # ans = []
-        #                 # for i, c in enumerate(nums):
-        #                 #     for ii in range(2):
-        #                 #         if newnum[ii] == c:
-        #                 #             ans += [i] 
-        #                 #             # resultt.append(i)
-        #                 # # return resultt
-        #                 # return ans
-
-
-              
-        
-       
 
 def main():
-    # # Output: [0, 1]
-    # nums = [2, 7, 11, 15]
-    # target = 9
-    # print(Solution().twoSum(nums, target))
+    # Output: [0, 1]
+    nums = [2, 7, 11, 15]
+    target = 9
+    print(Solution().twoSum(nums, target))
 
-    # # Output: [1, 2]
-    # nums = [2, 5, 7, 7, 11]
-    # target = 12
-    # print(Solution().twoSum(nums, target))
+    # Output: [1, 2]
+    nums = [2, 5, 7, 7, 11]
+    target = 12
+    print(Solution().twoSum(nums, target))
+   
+    # Output: [0, 1]
+    nums = [3, 3]
+    target = 6
+    print(Solution().twoSum(nums, target))
 
-    # # Output: [0, 1]
-    # nums = [3, 3]
-    # target = 6
-    # print(Solution().twoSum(nums, target))
-
-    # # Output: [1, 2]
-    # nums = [3, 2, 4]
-    # target = 6
-    # print(Solution().twoSum(nums, target))
-
-    # # Output: [3, 8]
-    # nums = [3, 2, 4, 6, 7, 4, 3, 6, 9, 9]
-    # target = 15
-    # print(Solution().twoSum(nums, target))
+    # Output: [1, 2]
+    nums = [3, 2, 4]
+    target = 6
+    print(Solution().twoSum(nums, target))
+    
+    # Output: [3, 8]
+    nums = [3, 2, 4, 6, 7, 4, 3, 6, 9, 9]
+    target = 15
+    print(Solution().twoSum(nums, target))
 
     # Output: [28, 45]
     nums = [230,863,916,585,981,404,316,785,88,12,70,435,384,778,887,755,740,337,86,92,325,422,815,650,920,125,277,336,221,847,168,23,677,61,400,136,874,363,394,199,863,997,794,587,124,321,212,957,764,173,314,422,927,783,930,282,306,506,44,926,691,568,68,730,933,737,531,180,414,751,28,546,60,371,493,370,527,387,43,541,13,457,328,227,652,365,430,803,59,858,538,427,583,368,375,173,809,896,370,789]
@@ -201,8 +114,6 @@ def main():
     print(Solution().twoSum(nums, target))
 
 
-
 if __name__ == '__main__':
     main()
-
 
