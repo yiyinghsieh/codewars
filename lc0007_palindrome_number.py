@@ -32,13 +32,31 @@ class Solution(object):
         :type x: int
         :rtype: bool
         """
-        
-
+        x_str = str(x)
+        if x_str[::-1] == x_str:
+            return True
+        else:
+            return False
 
 
 def main():
-    # Output: true
-    nums = 121
-    print(Solution().ispalindrome(x))
+    # Output: True
+    x = 121
+    print(Solution().isPalindrome(x))
 
+    # Output: False
+    x = -121
+    print(Solution().isPalindrome(x))
+
+    # Output: False
+    x = 10
+    print(Solution().isPalindrome(x))
+
+    # Output: true
+    x = 121
+    print(Solution().isPalindrome(x))
+
+
+if __name__ == '__main__':
+    main()
 
