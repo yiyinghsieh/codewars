@@ -27,7 +27,7 @@ Coud you solve it without converting the integer to a string?
 
 
 class Solution(object):
-    def isPalindrome(self, x):
+    def isPalindrome(self, x):  # faster
         """
         :type x: int
         :rtype: bool
@@ -54,6 +54,21 @@ class Solution(object):
             return False
         else:
             return True
+
+
+class Solution1(object):
+    def isPalindrome(self, x):
+        if x < 0:
+            return False
+        xx = x
+        y = 0
+        while xx != 0:
+            x_div, x_mod = divmod(xx, 10)
+            y = y * 10 + x_mod
+            xx = x_div
+        if y == x:
+            return True
+        return False
 
 
 def main():
