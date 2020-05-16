@@ -39,6 +39,23 @@ class Solution(object):
             return False
 
 
+class Solution(object):
+    def isPalindrome(self, x):
+        result = []
+        if x < 0:
+            return False
+        while x != 0:
+            num = divmod(x, 10)
+            x_div = num[0]    #12, 1, 0
+            x_mod = num[1]     #1, 2, 1
+            x = x_div
+            result.append(x_mod)
+        if result != result[::-1]:
+            return False
+        else:
+            return True
+
+
 def main():
     # Output: True
     x = 121
@@ -52,8 +69,8 @@ def main():
     x = 10
     print(Solution().isPalindrome(x))
 
-    # Output: true
-    x = 121
+    # Output: True
+    x = 262
     print(Solution().isPalindrome(x))
 
 
