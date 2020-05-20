@@ -1,4 +1,4 @@
-"""Leetcode 7. Two Sum
+"""Leetcode 1. Two Sum
 Easy
 
 URL: https://leetcode.com/problems/two-sum/

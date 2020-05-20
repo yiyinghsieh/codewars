@@ -1,4 +1,4 @@
-"""Leetcode 7. Palindrome Number
+"""Leetcode 9. Palindrome Number
 Easy
 
 URL: https://leetcode.com/problems/palindrome-number/
