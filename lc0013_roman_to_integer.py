@@ -79,6 +79,29 @@ class Solution(object):
         return result
         
 
+class Solution1(object):
+    def romanToInt(self, s):
+        dic = {
+            "I": 1,
+            "V": 5,
+            "X" :10,
+            "L": 50,
+            "C" :100,
+            "D": 500,
+            "M": 1000
+        }
+        n = len(s)
+        
+        result = 0
+        for i in range(n - 1):
+            if dic[s[i]] >= dic[s[i + 1]]:
+                result += dic[s[i]]
+            else:
+                result -= dic[s[i]]
+        result += dic[s[n - 1]]
+        return result
+
+
 def main():
     # Output: 3
     s = "III"
@@ -98,7 +121,7 @@ def main():
 
     # Output: 1994
     s = "MCMXCIV"
-    print(Solution().romanToInt(s))
+    print(Solution1().romanToInt(s))
 
 
 if __name__ == '__main__':
