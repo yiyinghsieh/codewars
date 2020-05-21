@@ -91,7 +91,7 @@ class Solution1(object):
             "M": 1000
         }
         n = len(s)
-        
+
         result = 0
         for i in range(n - 1):
             if dic[s[i]] >= dic[s[i + 1]]:
@@ -100,6 +100,26 @@ class Solution1(object):
                 result -= dic[s[i]]
         result += dic[s[n - 1]]
         return result
+
+
+class Solution2(object):
+    def romanToInt(self, s):
+        dic = {
+            "I": 1,
+            "V": 5,
+            "X" :10,
+            "L": 50,
+            "C" :100,
+            "D": 500,
+            "M": 1000
+        }
+        s = s.replace("IV", "IIII").replace("IX", "VIIII")
+        s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+        s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+        num = 0
+        for i in s:
+            num += dic[i]
+        return num
 
 
 def main():
@@ -121,7 +141,7 @@ def main():
 
     # Output: 1994
     s = "MCMXCIV"
-    print(Solution1().romanToInt(s))
+    print(Solution().romanToInt(s))
 
 
 if __name__ == '__main__':
