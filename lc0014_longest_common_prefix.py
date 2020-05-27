@@ -28,19 +28,59 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        
+        n = len(strs)
+        result = []
+        count = n
+
+        for i in strs:
+            for ii in range(1):
+                result.append(i[0])
+                print(result)
+                if ''.join(result) != i[0]*n:
+                    return 'no'
+        lst = []
+        while count > 1:
+            for i in strs:
+                for ii in range(count):
+                    lst.append(i[ii])
+                    # print(lst)
+                    if i[:count] == ''.join(lst):
+                        return i[:count], ''.join(lst)
+                    else:
+                        count -= 1
+
+        # print(i[:count], ''.join(result))
+        # while count < 5:
+            # if ''.join(result) == i[count] * n:
+            #     count += 1
+            # else:
+            #     break
+            #     return result
+            # return False
+            # if i[count] == i[0]:
+            #     result.append(i[count])
+            #     count += 1
+            # else:
+            #     break
+
+        # print(result[:2])
+
+            
+
+        # print(''.join(result), i[0] * n)
+
 
 def main():
-	# Output: "fl"
+    # Output: "fl"
     strs = ["flower","flow","flight"]
     print(Solution().longestCommonPrefix(strs))
 
-    # Output: ""
-    strs = ["dog","racecar","car"]
-    print(Solution().longestCommonPrefix(strs))
+    # # Output: ""
+    # strs = ["dog","racecar","car"]
+    # print(Solution().longestCommonPrefix(strs))
 
 
 
 if __name__ == '__main__':
-	main()
+    main()
 
