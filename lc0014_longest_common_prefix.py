@@ -28,56 +28,97 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        n = len(strs)
-        result = []
-        count = n
+        l = len(strs)
+        l_word = len(strs[0])
+        n = 0
+        while n <= l_word:
+            word = strs[1][n]
+            for i in range(1, l):
+                a = len(strs[i][:n])
+                print(a)
+                if n > a:
+                    return strs[i][:n]
+                if word == strs[i][n]:
+                    continue
+                else:
+                    return strs[1][:n]
+            n += 1
 
-        for i in strs:
-            for ii in range(1):
-                result.append(i[0])
-                print(result)
-                if ''.join(result) != i[0]*n:
-                    return 'no'
-        lst = []
-        while count > 1:
-            for i in strs:
-                for ii in range(count):
-                    lst.append(i[ii])
-                    # print(lst)
-                    if i[:count] == ''.join(lst):
-                        return i[:count], ''.join(lst)
-                    else:
-                        count -= 1
 
-        # print(i[:count], ''.join(result))
-        # while count < 5:
-            # if ''.join(result) == i[count] * n:
-            #     count += 1
-            # else:
-            #     break
-            #     return result
-            # return False
-            # if i[count] == i[0]:
-            #     result.append(i[count])
-            #     count += 1
-            # else:
-            #     break
 
-        # print(result[:2])
 
-            
 
-        # print(''.join(result), i[0] * n)
 
+
+
+
+
+
+
+
+
+        # if not strs or not strs[0]:
+        #     return ''
+
+        # if len(strs) == 1:
+        #     return strs[0]
+
+        # n = len(strs)
+        # c = 1
+        # cc = 1
+        # lst = []
+
+        # for i in strs:
+        #     lst.append(i[0])
+        # if ''.join(lst) != lst[0]*n:
+        #     return ''
+        # elif ''.join(lst) == lst[0]*n and len(i) ==1:
+        #     return lst[0]
+
+        # while c <= 8:#######
+        #     result = []
+        #     for i in strs:
+        #         for ii in range(c):
+        #             result.append(i[ii])
+        #         if len(i) >= c and ''.join(result) == i[:ii]*n:
+        #             c += 1
+        #         if len(i) >= c or ''.join(result) != i[:ii]*n:
+
+        #             # print(result)
+        #             return i[:ii]
+        #           # return i[:ii]
+        #               # return 'a'
+        #         else:
+        #             return strs[0]
+
+        # # if len(i) == c and ''.join(result) == i[:ii]*n:
+        # return strs[0]
+                    
 
 def main():
-    # Output: "fl"
-    strs = ["flower","flow","flight"]
+    # # Output: "fl"
+    # strs = ["flower","flow","flight"]
+    # strs = ["flower","flow","flight","floor"]
+    strs = ["flower","flow","flow","floweo"]
+
     print(Solution().longestCommonPrefix(strs))
 
-    # # Output: ""
-    # strs = ["dog","racecar","car"]
-    # print(Solution().longestCommonPrefix(strs))
+    # Output: ""
+    strs = ["dog","racecar","car"]
+    print(Solution().longestCommonPrefix(strs))
+
+    # Output: "c"
+    strs = ["c","c"]
+    print(Solution().longestCommonPrefix(strs))
+
+
+    # Output: "aa"
+    # strs = ["aa","aa"]
+    strs = ["aa","aa","aa"]
+    # strs = ["aa"]
+    # strs = ["aa","ab","aa"]
+    print(Solution().longestCommonPrefix(strs))
+
 
 
 
