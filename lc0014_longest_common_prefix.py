@@ -28,33 +28,30 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
+        if not strs or not strs[0]:
+            return ''
+        if len(strs) == 1:
+            return strs[0]
+
         l = len(strs)
         l_word = len(strs[0])
+        # print(l_word)
         n = 0
-        while n <= l_word:
-            word = strs[1][n]
+        while n <= l_word -1:
+            word = strs[1][n]#######
             for i in range(1, l):
-                a = len(strs[i][:n])
-                print(a)
-                if n > a:
-                    return strs[i][:n]
+                a = len(strs[i])
+                print(a-1, n, a)
+                if n == a-1 and word == strs[i][n]:
+                    return strs[i][:n+1]
                 if word == strs[i][n]:
+                    # print(word, strs[i][n])
                     continue
                 else:
-                    return strs[1][:n]
+                    print(strs[i][:n])
+                    print(strs[0][:n])
+                    return strs[0][:n]
             n += 1
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         # if not strs or not strs[0]:
@@ -98,26 +95,52 @@ class Solution(object):
 def main():
     # # Output: "fl"
     # strs = ["flower","flow","flight"]
-    # strs = ["flower","flow","flight","floor"]
-    strs = ["flower","flow","flow","floweo"]
+    # print(Solution().longestCommonPrefix(strs))
 
-    print(Solution().longestCommonPrefix(strs))
+    # # Output: "fl"
+    # strs = ["flower","flow","flight","floor"]
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: "flow"
+    # strs = ["flower","flow","flow","floweo"]
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: ""
+    # strs = ["dog","racecar","car"]
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: "c"
+    # strs = ["c","c"]
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: "c"
+    # strs = ["c"]
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: ""
+    # strs = [""]
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: ""
+    # strs = []
+    # print(Solution().longestCommonPrefix(strs))
 
     # Output: ""
-    strs = ["dog","racecar","car"]
+    strs = ["a","b"]  #####expection 
     print(Solution().longestCommonPrefix(strs))
 
-    # Output: "c"
-    strs = ["c","c"]
-    print(Solution().longestCommonPrefix(strs))
+    print(strs[i][:n])
+    print(strs[0][:n])
+    return strs[0][:n]
 
 
-    # Output: "aa"
+    # # Output: "aa"
     # strs = ["aa","aa"]
-    strs = ["aa","aa","aa"]
-    # strs = ["aa"]
-    # strs = ["aa","ab","aa"]
-    print(Solution().longestCommonPrefix(strs))
+    # print(Solution().longestCommonPrefix(strs))
+
+    # # Output: ""
+    # strs = ["aa","ba","aa"]
+    # print(Solution().longestCommonPrefix(strs))
 
 
 
