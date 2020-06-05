@@ -32,7 +32,6 @@ class Solution(object):
         if not strs:
             return ''
         result = []
-        l = len(strs[0])
         for i, c in enumerate(strs[0]):
             for k in range(1, len(strs)):
                 if i >= len(strs[k]) or c != strs[k][i]:
