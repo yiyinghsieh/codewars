@@ -76,7 +76,31 @@ class Solution(object):
         else:
             return False
 
+        
 
+class Solution(object):
+    def isValid(self, s):
+        
+        if not s:
+            return True
+
+        stack = [] 
+        dic = {
+            ')': '(',
+            ']': '[',
+            '}': '{'
+        }
+
+        for c in s:
+            if c in dic:
+                if not (stack and stack.pop() == dic[c]):
+                    return False
+            else:
+                stack.append(c)
+
+        return not stack
+
+    
 def main():
     # Output: true
     s = "()"
@@ -102,6 +126,7 @@ def main():
     # Output: true
     s = "({[]}[][])" 
     print(Solution().isValid(s))
+    
 
 if __name__ == '__main__':
     main()
