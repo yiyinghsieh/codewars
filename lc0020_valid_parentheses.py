@@ -75,7 +75,6 @@ class Solution(object):
             return True
         else:
             return False
-
         
 
 class Solution(object):
@@ -100,6 +99,35 @@ class Solution(object):
 
         return not stack
 
+
+class Solution1(object):
+    def isValid(self, s):
+        
+        open_close_dic = {
+            '(': ')',
+            '[': ']',
+            '{': '}'
+        }
+        open_set = ('([{')
+        close_set = (')]}')
+        stack = []
+
+        for c in s:
+            if c in open_set:
+                stack.append(c)
+                continue
+            if c in close_set:
+                if not stack:
+                    return False
+                stack_pop = stack.pop()
+
+                if open_close_dic[stack_pop] != c:
+                    return False
+        if not stack:
+            return True
+        else:
+            False
+
     
 def main():
     # Output: true
@@ -109,7 +137,6 @@ def main():
     # Output: true
     s = "()[]{}"
     print(Solution().isValid(s))
-
 
     # Output: false
     s = "(]"
@@ -126,7 +153,7 @@ def main():
     # Output: true
     s = "({[]}[][])" 
     print(Solution().isValid(s))
-    
+
 
 if __name__ == '__main__':
     main()
